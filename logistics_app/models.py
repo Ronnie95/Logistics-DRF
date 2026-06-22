@@ -23,3 +23,17 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+class Delivery(models.Model):
+    stop = models.IntegerField()
+    customer_name = models.CharField(max_length=100)
+    delivery_window = models.TimeField()
+    pickup_location = models.CharField(max_length=100)
+    dropoff_location = models.CharField(max_length=100)
+    order_number = models.Random()
+    status_choices = (
+        ("IN ROUTE", "in route"),
+        ("ARRIVED","ARRIVED"),
+        ("COMPLETED", "COMPLETED"),
+    )
+    status = models.CharField(max_length=100, choices=status_choices)
