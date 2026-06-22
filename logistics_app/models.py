@@ -37,3 +37,8 @@ class Delivery(models.Model):
         ("COMPLETED", "COMPLETED"),
     )
     status = models.CharField(max_length=100, choices=status_choices)
+
+class Routes(models.Model): #add permissions assigned_to after enpoint testing 
+    route_name = models.CharField(max_length=100)
+    deliveries = models.ForeignKey(Delivery, on_delete=models.CASCADE, related_name="deliveries") #watch for this
+ 
