@@ -44,6 +44,12 @@ class Trailer(models.Model):
         ("53 FT", "53 ft"),
     )
     trailer_option = models.CharField(max_length=20, choices=trailer_choices)
+
+class CustomerInfo(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=20)
     
 class Delivery(models.Model):
     stop = models.IntegerField()
