@@ -1,4 +1,4 @@
-from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliverExceptions, HOSLog, PreTripInspection, InspectionItem
+from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliverExceptions, HOSLog, PreTripInspection, InspectionItem, MaintenanceRecord
 
 from rest_framework import serializers, 
 from rest_framework.serializers import ModelSerializer
@@ -57,3 +57,13 @@ class InspectionItemSerializer(ModelSerializer):
     class Meta:
         model = InspectionItem 
         fields = ('id', 'inspection', 'item_name', 'passed', 'notes')
+
+class MaintenanceRecordSerializer(ModelSerializer):
+    class Meta:
+        model = MaintenanceRecord 
+        fields = ('id', 'trucks', 'status','opened_date', 'completed_date')
+
+class MaintenanceItemSerializer(ModelSerializer):
+    class Meta:
+        model = MaintenanceItem 
+        fields = ('id', 'maintenance_record', 'description','labor_hours', 'completed')
