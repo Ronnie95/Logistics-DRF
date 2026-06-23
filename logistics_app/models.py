@@ -95,3 +95,94 @@ class HOSLog(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     #driver permissions will be updated 
+
+
+class PreTripInspection(models.Model):
+
+    trucks = models.ForeignKey(
+        Truck,
+        on_delete=models.CASCADE,
+        related_name="inspections"
+    )
+
+    # driver = models.ForeignKey(
+    #     Driver,
+    #     on_delete=models.CASCADE
+    # )
+
+    completed_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    overall_passed = models.BooleanField(
+        default=True
+    )
+
+class InspectionItem(models.Model):
+
+    inspection = models.ForeignKey(
+        PreTripInspection,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+
+    item_name = models.CharField(
+        max_length=100
+    )
+
+    passed = models.BooleanField()
+
+    notes = models.TextField(
+        blank=True
+    )
+
+class MaintenanceRecord(models.Model):
+
+    STATUS_CHOICES = [
+        ("OPEN", "Open"),
+        ("IN_PROGRESS", "In Progress"),
+        ("COMPLETE", "Complete"),
+    ]
+
+    trucks = models.ForeignKey(
+        Truck,
+        on_delete=models.CASCADE,
+        related_name="maintenance_records"
+    )
+
+    
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="OPEN"
+    )
+
+    opened_date = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    completed_date = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+class MaintenanceItem(models.Model):
+
+    maintenance_record = models.ForeignKey(
+        MaintenanceRecord,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+
+    description = models.CharField(
+        max_length=255
+    )
+
+    labor_hours = models.DecimalField(
+        max_digits=5,
+        decimal_places=2
+    )
+
+    completed = models.BooleanField(
+        default=False
+    )
