@@ -71,4 +71,15 @@ class Delivery(models.Model):
         ("COMPLETED", "COMPLETED"),
     )
     status = models.CharField(max_length=100, choices=status_choices)
+    delivered_at = models.DateTimeField()
 
+class DeliverExceptions(models.CharField):
+    exception_choices = (
+        ("NO_HOME", "Cstomer not home"),
+        ("BAD_ADDRESS", "Bad Adress"),
+        ("DAMAGED", "Damaged Product"),
+        ("REFUSED", "Customer Refused"),
+    )
+    exception_type = models.CharField(max_length=50, choices=exception_choices)
+    delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE)
+    notes = models.TextField()
