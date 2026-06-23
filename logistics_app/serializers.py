@@ -1,4 +1,5 @@
-from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliverExceptions, HOSLog
+from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliverExceptions, HOSLog, PreTripInspection, InspectionItem
+
 from rest_framework import serializers, 
 from rest_framework.serializers import ModelSerializer
 
@@ -46,3 +47,13 @@ class HOSLogSerializer(ModelSerializer):
     class Meta:
         model = HOSLog 
         fields = ('id','hos_type', 'start_time', 'end_time')
+    
+class PreTripSerializer(ModelSerializer):
+    class Meta:
+        model = PreTripInspection
+        fields = ('id', 'trucks', 'completed_at', 'overall_passed')
+    
+class InspectionItemSerializer(ModelSerializer):
+    class Meta:
+        model = InspectionItem 
+        fields = ('id', 'inspection', 'item_name', 'passed', 'notes')
