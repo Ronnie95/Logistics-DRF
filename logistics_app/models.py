@@ -83,3 +83,15 @@ class DeliverExceptions(models.CharField):
     exception_type = models.CharField(max_length=50, choices=exception_choices)
     delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE)
     notes = models.TextField()
+
+class HOSLog(models.Model):
+    hos_choices = (
+        ("OFF", "off"),
+        ("ON", "on"),
+        ("DRIVING", "driving"),
+        ("SLEPPER BERTH", "sb")
+    )
+    hos_type = models.CharField(max_length=50, choices=hos_choices)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    #driver permissions will be updated 
