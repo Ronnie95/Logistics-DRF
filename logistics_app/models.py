@@ -30,6 +30,20 @@ class Truck(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField
+    truck_choices = (
+        ("BOX TRUCK", "box truck"),
+        ("DAY CAB", "day cab"),
+        ("SINGLE CAB", "single cab")
+    )
+    truck_options = models.CharField(max_length=50, choices=truck_choices)
+
+class Trailer(models.Model):
+    trailer_number = models.IntegerField()
+    trailer_choices = (
+        ("28 FT", "28 ft"),
+        ("53 FT", "53 ft"),
+    )
+    trailer_option = models.CharField(max_length=20, choices=trailer_choices)
     
 class Delivery(models.Model):
     stop = models.IntegerField()
