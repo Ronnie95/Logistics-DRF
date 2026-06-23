@@ -24,6 +24,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
+
+class Truck(models.Model):
+    truck_number = models.IntegerField()
+    make = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+    year = models.IntegerField
+    
 class Delivery(models.Model):
     stop = models.IntegerField()
     customer_name = models.CharField(max_length=100)
