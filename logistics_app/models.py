@@ -25,13 +25,14 @@ class UserProfile(models.Model):
         return self.user.username
     
 
+
 class Truck(models.Model):
     truck_number = models.IntegerField()
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField
     truck_choices = (
-        ("BOX TRUCK", "box truck"),
+        ("FLAT BED", "flat bed"),
         ("DAY CAB", "day cab"),
         ("SINGLE CAB", "single cab")
     )
@@ -45,6 +46,15 @@ class Trailer(models.Model):
     )
     trailer_option = models.CharField(max_length=20, choices=trailer_choices)
 
+class Routes(models.Model): #add permissions assigned_to after enpoint testing 
+    route_name = models.CharField(max_length=100)
+    route_date = models.DateField()
+    trucks = models.ForeignKey(Truck, on_delete= models.CASCADE)
+    trailers = models.ForeignKey(Trailer, on_delete= models.CASCADE)
+
+    #driver permissions will be added once tested
+
+
 class CustomerInfo(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
@@ -52,11 +62,8 @@ class CustomerInfo(models.Model):
     state = models.CharField(max_length=20)
     
 class Delivery(models.Model):
-    stop = models.IntegerField()
-    customer_name = models.CharField(max_length=100)
-    delivery_window = models.TimeField()
-    pickup_location = models.CharField(max_length=100)
-    dropoff_location = models.CharField(max_length=100)
+    routes = models.ForeignKey(Routes, on_delete=models.CASCADE, related_name= "deliveries")
+    customer = models.ForeignKey(CustomerInfo, on_delete=models.CASCADE)
     order_number = models.Random()
     status_choices = (
         ("IN ROUTE", "in route"),
@@ -65,7 +72,3 @@ class Delivery(models.Model):
     )
     status = models.CharField(max_length=100, choices=status_choices)
 
-class Routes(models.Model): #add permissions assigned_to after enpoint testing 
-    route_name = models.CharField(max_length=100)
-    deliveries = models.ForeignKey(Delivery, on_delete=models.CASCADE, related_name="deliveries") #watch for this
- 
