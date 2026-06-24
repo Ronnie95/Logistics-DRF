@@ -49,6 +49,3 @@ class MaintenanceRecordViewSet(ModelViewSet):
     queryset = MaintenanceRecord.objects.all()
     serializer_class = MaintenanceRecordSerializer 
 
-class TruckViewSet(ModelViewSet):
-    queryset = Truck.objects.all()
-    serializer_class = TruckSerializer
