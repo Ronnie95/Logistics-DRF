@@ -73,7 +73,7 @@ class Delivery(models.Model):
     status = models.CharField(max_length=100, choices=status_choices)
     delivered_at = models.DateTimeField()
 
-class DeliverExceptions(models.CharField):
+class DeliveryExceptions(models.CharField):
     exception_choices = (
         ("NO_HOME", "Cstomer not home"),
         ("BAD_ADDRESS", "Bad Adress"),
