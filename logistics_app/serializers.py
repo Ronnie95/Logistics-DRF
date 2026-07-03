@@ -1,7 +1,40 @@
-from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliveryExceptions, HOSLog, PreTripInspection, InspectionItem, MaintenanceRecord, MaintenanceItem
-
+from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliveryExceptions, HOSLog, PreTripInspection, InspectionItem, MaintenanceRecord, MaintenanceItem, UserProfile
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
+
+class RegisterSerializer(ModelSerializer):
+
+    role = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "password",
+            "role"
+        ]
+        extra_kwargs = {
+            "password": {"write_only": True}
+        }
+
+    def create(self, validated_data):
+
+        role = validated_data.pop("role")
+
+        user = User.objects.create_user(
+            **validated_data
+        )
+
+        UserProfile.objects.create(
+            user=user,
+            role=role
+        )
+
+        return user
+
+
 
 class TruckSerializer(ModelSerializer):
     model = Truck 
