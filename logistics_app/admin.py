@@ -19,12 +19,3 @@ admin.site.register(HOSLog)
 admin.site.register(InspectionItem)
 
 
-urlpatterns = [
-
-    path('',include(router.urls)),
-    path(
-        "register/",
-        RegisterView.as_view(),
-        name="register"
-    ),
-]
