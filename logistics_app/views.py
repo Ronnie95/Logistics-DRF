@@ -2,7 +2,13 @@ from django.shortcuts import render
 from .models import Trailer, Truck, Routes, CustomerInfo, DeliveryExceptions, Delivery, HOSLog, PreTripInspection, InspectionItem, MaintenanceItem, MaintenanceRecord
 from rest_framework.viewsets import ModelViewSet
 from .serializers import MaintenanceRecordSerializer, MaintenanceItemSerializer, InspectionItemSerializer, PreTripSerializer, HOSLogSerializer, DeliveryExceptionSerializer, CustomerInfoSerializer, TrailerSerializer, TruckSerializer, DeliverySerializer, RoutesSerializer
+from rest_framework import generics
+
 # Create your views here.
+
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+
 
 class TruckViewSet(ModelViewSet):
     queryset = Truck.objects.all()
