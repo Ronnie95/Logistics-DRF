@@ -11,7 +11,11 @@ router.register(r'routes', RoutesViewSet)
 router.register(r'pretrip', PreTripInspectionViewSet)
 router.register(r'customers', CustomerInfoViewSet)
 router.register(r'maintenanceitems', MaintenanceItemViewSet)
-router.register(r'maintenancerecors', MaintenanceRecordViewSet)
+router.register(r'maintenancerecords', MaintenanceRecordViewSet)
+router.register(r'hoslogs', HOSLogViewSet)
+router.register(r'inspectionitems', InspectionItemViewSet)
+
+
 
 
 urlpatterns = [
