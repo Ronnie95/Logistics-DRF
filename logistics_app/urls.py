@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import TrailerViewSet, TruckViewSet, DeliveryViewSet, DeliveryExceptionsViewSet, RoutesViewSet, PreTripInspectionViewSet, CustomerInfoViewSet, MaintenanceItemViewSet, MaintenanceRecordViewSet, HOSLogViewSet, InspectionItemViewSet
+from .views import TrailerViewSet, TruckViewSet, DeliveryViewSet, DeliveryExceptionsViewSet, RoutesViewSet, PreTripInspectionViewSet, CustomerInfoViewSet, MaintenanceItemViewSet, MaintenanceRecordViewSet, HOSLogViewSet, InspectionItemViewSet, RegisterView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -12,3 +12,14 @@ router.register(r'pretrip', PreTripInspectionViewSet)
 router.register(r'customers', CustomerInfoViewSet)
 router.register(r'maintenanceitems', MaintenanceItemViewSet)
 router.register(r'maintenancerecors', MaintenanceRecordViewSet)
+
+
+urlpatterns = [
+
+    path('',include(router.urls)),
+    path(
+        "register/",
+        RegisterView.as_view(),
+        name="register"
+    ),
+]
