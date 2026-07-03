@@ -27,6 +27,7 @@ class UserProfile(models.Model):
 
 
 class Truck(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     truck_number = models.IntegerField()
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -39,6 +40,7 @@ class Truck(models.Model):
     truck_options = models.CharField(max_length=50, choices=truck_choices)
 
 class Trailer(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     trailer_number = models.IntegerField()
     trailer_choices = (
         ("28 FT", "28 ft"),
@@ -56,12 +58,14 @@ class Routes(models.Model): #add permissions assigned_to after enpoint testing
 
 
 class CustomerInfo(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=20)
     
 class Delivery(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     routes = models.ForeignKey(Routes, on_delete=models.CASCADE, related_name= "deliveries")
     customer = models.ForeignKey(CustomerInfo, on_delete=models.CASCADE)
     order_number = models.Random()
@@ -74,6 +78,7 @@ class Delivery(models.Model):
     delivered_at = models.DateTimeField()
 
 class DeliveryExceptions(models.CharField):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     exception_choices = (
         ("NO_HOME", "Cstomer not home"),
         ("BAD_ADDRESS", "Bad Adress"),
@@ -85,6 +90,7 @@ class DeliveryExceptions(models.CharField):
     notes = models.TextField()
 
 class HOSLog(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     hos_choices = (
         ("OFF", "off"),
         ("ON", "on"),
@@ -98,7 +104,7 @@ class HOSLog(models.Model):
 
 
 class PreTripInspection(models.Model):
-
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     trucks = models.ForeignKey(
         Truck,
         on_delete=models.CASCADE,
@@ -119,7 +125,7 @@ class PreTripInspection(models.Model):
     )
 
 class InspectionItem(models.Model):
-
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     inspection = models.ForeignKey(
         PreTripInspection,
         on_delete=models.CASCADE,
@@ -167,7 +173,7 @@ class MaintenanceRecord(models.Model):
     )
 
 class MaintenanceItem(models.Model):
-
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     maintenance_record = models.ForeignKey(
         MaintenanceRecord,
         on_delete=models.CASCADE,
