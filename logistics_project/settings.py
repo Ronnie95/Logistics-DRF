@@ -128,9 +128,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+# REST_FRAMEWORK = {
+#     # Example: Use Django's standard permissions, or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#                 "rest_framework_simplejwt.authentication.JWTAuthentication",
+
+#     ]
+# }
 REST_FRAMEWORK = {
-    # Example: Use Django's standard permissions, or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ]
 }
