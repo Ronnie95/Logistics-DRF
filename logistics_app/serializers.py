@@ -1,6 +1,6 @@
 from .models import Routes, Delivery, Trailer, Truck, CustomerInfo, DeliveryExceptions, HOSLog, PreTripInspection, InspectionItem, MaintenanceRecord, MaintenanceItem
 
-from rest_framework import serializers, 
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 class TruckSerializer(ModelSerializer):

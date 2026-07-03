@@ -68,7 +68,7 @@ class Delivery(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     routes = models.ForeignKey(Routes, on_delete=models.CASCADE, related_name= "deliveries")
     customer = models.ForeignKey(CustomerInfo, on_delete=models.CASCADE)
-    order_number = models.Random()
+    order_number = models.CharField(max_length=10, unique=10)
     status_choices = (
         ("IN ROUTE", "in route"),
         ("ARRIVED","ARRIVED"),
@@ -77,7 +77,7 @@ class Delivery(models.Model):
     status = models.CharField(max_length=100, choices=status_choices)
     delivered_at = models.DateTimeField()
 
-class DeliveryExceptions(models.CharField):
+class DeliveryExceptions(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     exception_choices = (
         ("NO_HOME", "Cstomer not home"),
