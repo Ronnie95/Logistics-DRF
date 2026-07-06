@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Trailer, Truck, Routes, CustomerInfo, DeliveryExceptions, Delivery, HOSLog, PreTripInspection, InspectionItem, MaintenanceItem, MaintenanceRecord
+from .models import Trailer, Truck, Routes, CustomerInfo, DeliveryExceptions, Delivery, HOSLog, PreTripInspection, InspectionItem, MaintenanceItem, MaintenanceRecord, User
 from rest_framework.viewsets import ModelViewSet
 from .serializers import MaintenanceRecordSerializer, MaintenanceItemSerializer, InspectionItemSerializer, PreTripSerializer, HOSLogSerializer, DeliveryExceptionSerializer, CustomerInfoSerializer, TrailerSerializer, TruckSerializer, DeliverySerializer, RoutesSerializer, RegisterSerializer
 from rest_framework import generics
@@ -8,6 +8,12 @@ from rest_framework import generics
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
+
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+
 
 
 class TruckViewSet(ModelViewSet):
