@@ -80,7 +80,7 @@ class Delivery(models.Model):
 class DeliveryExceptions(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     exception_choices = (
-        ("NO_HOME", "Cstomer not home"),
+        ("NO_HOME", "Customer not home"),  #update Migrations
         ("BAD_ADDRESS", "Bad Adress"),
         ("DAMAGED", "Damaged Product"),
         ("REFUSED", "Customer Refused"),
